@@ -1,3 +1,6 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Senja Touring Cup</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,400;0,600;0,700;0,900;1,700;1,900&display=swap">
@@ -15,6 +18,8 @@
   --hud:"Titillium Web","Segoe UI",system-ui,sans-serif;
   color-scheme:dark;
 }
+[hidden]{display:none!important}
+*,*::before,*::after{box-sizing:border-box}
 html,body{height:100%;margin:0;overflow:hidden;background:var(--bg);color:var(--ink);font-family:var(--hud);-webkit-user-select:none;user-select:none;touch-action:none}
 #c{position:fixed;inset:0;width:100%;height:100%;display:block}
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:4px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
@@ -614,7 +619,7 @@ function syncCars(dt){
     r.body.rotation.x=r.braking&&started?.015:0;
     r.tail.emissiveIntensity=r.braking&&started?3:.7;
     for(const w of r.wheels){w.spin.rotation.x+=r.speed*dt/.34;if(w.front)w.piv.rotation.y=kAt(r.s+3)*4;}
-    r.tag.visible=state==='race'&&r.car.position.distanceToSquared(p.car.position)<70*70;}
+    const cd=r.car.position.distanceToSquared(camera.position);r.tag.visible=state==='race'&&cd>14*14&&cd<75*75;}
 }
 
 // ================= camera =================
